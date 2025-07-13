@@ -31,7 +31,10 @@ const HeaderCell: React.FC<HeaderCellProps> = ({
       <button
         ref={chevronRef}
         className="flex items-center justify-center hover:bg-gray-200 rounded p-1"
-        onClick={() => onToggleDropdown(colId)}
+        onClick={() => {
+          console.log(`Dropdown toggle clicked for column: ${colId}`);
+          onToggleDropdown(colId);
+        }}
       >
         <ChevronDown size={15} className="ml-1 text-[#AFAFAF]" />
       </button>

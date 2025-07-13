@@ -43,7 +43,10 @@ const SheetCell: React.FC<SheetCellProps> = ({ value, isEditing, editValue, onEd
               borderImage: 'repeating-linear-gradient(to bottom, #CBCBCB 0 8px, transparent 8px 18px) 1',
             }
         }
-        onClick={onEdit}
+        onClick={() => {
+          console.log(`Cell edit clicked: Column ${colId}`);
+          onEdit();
+        }}
       >
         {isEditing ? (
           <input
@@ -77,7 +80,10 @@ const SheetCell: React.FC<SheetCellProps> = ({ value, isEditing, editValue, onEd
           ? { minWidth: 0, width: '100%' }
           : { minWidth: 0, width: '100%', borderRight, borderBottom }
         }
-        onClick={onEdit}
+        onClick={() => {
+          console.log(`Cell edit clicked: Column ${colId}`);
+          onEdit();
+        }}
       >
         {isEditing ? (
           <input

@@ -40,7 +40,10 @@ const SheetRowComponent: React.FC<SheetRowProps> = ({ rowIdx, row, columnWidths,
         const resizable = (cell.column.columnDef.meta as { resizable?: boolean })?.resizable !== false;
         return (
           <div key={cell.id} style={{ width: columnWidths[cell.column.id], minWidth: 0 }}
-            onClick={() => setFocusedCell({ rowIdx, colId: cell.column.id })}
+            onClick={() => {
+              console.log(`Cell clicked: Row ${rowIdx + 1}, Column ${cell.column.id}`);
+              setFocusedCell({ rowIdx, colId: cell.column.id });
+            }}
           >
             <SheetCell
               value={cell.getValue() as string}

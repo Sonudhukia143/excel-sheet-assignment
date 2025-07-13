@@ -38,10 +38,12 @@ const ColumnDropdown: React.FC<ColumnDropdownProps> = ({
   if (!isOpen) return null;
 
   const handleHide = () => {
+    console.log(`Hide column clicked: ${colId}`);
     onHideColumn(colId);
     closeDropdown();
   };
   const handleShowAll = () => {
+    console.log('Show all columns clicked');
     onShowAllColumns();
     closeDropdown();
   };
