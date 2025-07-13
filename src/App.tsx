@@ -4,15 +4,12 @@ import Sheet from "./components/sheet/Sheet"
 import TitleRow from "@/components/TitleRow.tsx"
 import { useRef, useState, useEffect } from "react"
 import { useSheet } from "./hooks/useSheet"
-import FloatingToggle from "@/components/ui/FloatingToggle";
 
 function App() {
   const sheetContentRef = useRef<HTMLDivElement>(null);
   const stickyScrollRef = useRef<HTMLDivElement>(null);
   const [sheetWidth, setSheetWidth] = useState<number>(window.innerWidth);
   const [selectedTab, setSelectedTab] = useState<string>('All Orders');
-  const [showModal, setShowModal] = useState(false);
-  const timerRef = useRef<number | null>(null);
 
   // Move useSheet to App level to prevent state reset
   const sheetState = useSheet();
@@ -30,20 +27,6 @@ function App() {
     const timer = setTimeout(updateSheetWidth, 100);
     return () => clearTimeout(timer);
   }, []);
-
-  // Auto-close modal after 10 seconds
-  useEffect(() => {
-    if (showModal) {
-      timerRef.current = window.setTimeout(() => {
-        setShowModal(false);
-        localStorage.setItem('modalShown', 'true');
-      }, 10000);
-    }
-    return () => {
-      if (timerRef.current) window.clearTimeout(timerRef.current);
-    };
-  }, [showModal]);
-
 
   // Sync scroll between sheet and sticky scrollbar
   const handleSheetScroll = () => {
@@ -95,7 +78,6 @@ function App() {
       <div className="fixed left-0 right-0 bottom-0 h-12 z-[80] shadow-[0_-2px_8px_0_rgba(0,0,0,0.06)] bg-white">
         <TitleRow selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
       </div>
-      <FloatingToggle onClick={() => setShowModal(true)} />
     </div>
   )
 }
